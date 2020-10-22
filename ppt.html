@@ -1,57 +1,91 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-<script>
-    //haremos la funcion computerPlay
-    function computerPlay(){
-        let possibleOutcomes = ['rock', 'paper', 'scissors'];
-        let randomAnswer = Math.floor(Math.random()*possibleOutcomes.length);
-            return possibleOutcomes[randomAnswer].toUpperCase();
-    }
-    //Jugar la Ronda
-    function playRound(playerSelection, computerSelection) {
-        const computerSelection = computerPlay();
-        let playerSelection = prompt('rock', 'paper', 'scissors');
-        if (computerSelection === playerSelection) {
-    return 'You draw m8';
+    
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissors">Scissors</button>
 
-  } else if (computerSelection === 'rock' && playerSelection === 'paper') {
-    return 'Winna winna.';
+    <div id="textContainer"></div>
 
-  } else if (computerSelection === 'paper' && playerSelection === 'scissors') {
-    return 'Winna winna.';
+    <script>
+          let userWins = 0,
+        computerWins = 0;
+    
+    let playerSelection,
+        computerSelection;
+    let buttonRock = document.querySelector('.rock');
+    let buttonPaper = document.querySelector('.paper');
+    let buttonScissors = document.querySelector('.scissors');
+    
+    buttonRock.addEventListener('click', () => playRound('rock'));
+    buttonPaper.addEventListener('click', () => playRound('paper'));
+    buttonScissors.addEventListener('click', () => playRound('scissors'));
 
-  } else if (computerSelection === 'scissors' && playerSelection === 'rock') {
-    return 'Winna winna.';
+    function playRound(playerSelection) {
+        if (userWins===5 || computerWins===5) return;
+        let computerPlay= Math.random()*10;
+        if (computerPlay>=0 && computerPlay<(10/3)) {
+            computerSelection= 'rock';
+            if (playerSelection==='scissors') {
+                computerWins++;
+                roundResult = `You lost this round. Rock beats scissors.`;
+            } else if (playerSelection==='paper') {
+                userWins++;
+                roundResult = `You won this round. Paper beats rock.`;
+            } else{
+                roundResult = `Neither won this round. Rock can\'t beat rock.`;
+            }
+        }
+        else if (computerPlay>=(10/3) && computerPlay<(10/3*2)) {
+            computerSelection= 'paper';
+            if (playerSelection==='scissors') {
+                userWins++;
+                roundResult = `You won this round. Scissors beat paper.`;
+            } else if (playerSelection==='rock') {
+                computerWins++;
+                roundResult = `You lost this round. Paper beats rock.`;
+            } else{
+                roundResult = `Neither won this round. Paper can\'t beat paper.`
+            }
+        } 
+        else {
+            computerSelection= 'scissors';
+            if (playerSelection==='rock') {
+                userWins++;
+                roundResult = `You won this round. Rock beats scissors.`;
+            } else if (playerSelection==='paper') {
+                computerWins++;
+                roundResult = `You lost this round. Scissors beat paper.`;
+            } else{
+                roundResult = `Neither win. Scissors can\'t beat scissors.`;
+            }
+        }
+        
+        let textContainer = document.querySelector("#textContainer");        
+        
+        if (userWins<5 && computerWins<5) {
+            roundText = document.createElement('p');
+            roundText.textContent = `${roundResult} Current Score is: ${userWins}:${computerWins}`;
+            textContainer.appendChild(roundText);
+        } else {
+            if (userWins===5) {
+                roundText = document.createElement('p');
+                roundText.textContent = `You have won. Final score is: ${userWins}:${computerWins}`;
+                textContainer.appendChild(roundText);
+            } else {
+                roundText = document.createElement('p');
+                roundText.textContent = `You have lost. Final score is: ${userWins}:${computerWins}`;
+                textContainer.appendChild(roundText);
+            }
+        }
+    }    
+    </script>
 
-  } else if (computerSelection === 'scissors' && playerSelection === 'paper') {
-    return 'Loser. Sad.';
-
-  } else if (computerSelection === 'paper' && playerSelection === 'rock') {
-    return 'Loser. Sad.';
-
-  } else if (computerSelection === 'rock' && playerSelection === 'scissors') {
-    return 'Loser. Sad.';
-
-  } else {
-    return 'You did something wrong.';
-  }
-}
-//Function that allows us to play a 5 round game
-function game(){
-    for (var i = 0; i < 5; i++) {
-    let playerSelection = prompt('Rock, paper, scissors?').toUpperCase();
-    let computerSelection = computerPlay();
-    console.log(playRound(playerSelection, computerSelection));
-  }
-}
-            
-
-  // your code here!
-
-}
-</script>
 </body>
 </html>

@@ -1,0 +1,146 @@
+[1mdiff --git a/ppt.html b/ppt.html[m
+[1mindex c0a7fcd..17d9fbe 100644[m
+[1m--- a/ppt.html[m
+[1m+++ b/ppt.html[m
+[36m@@ -1,57 +1,91 @@[m
+[31m-<html>[m
+[32m+[m[32m<!DOCTYPE html>[m
+[32m+[m[32m<html lang="en">[m
+ <head>[m
+[31m-[m
+[32m+[m[32m    <meta charset="UTF-8">[m
+[32m+[m[32m    <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+[32m+[m[32m    <title>Document</title>[m
+ </head>[m
+ <body>[m
+[31m-<script>[m
+[31m-    //haremos la funcion computerPlay[m
+[31m-    function computerPlay(){[m
+[31m-        let possibleOutcomes = ['rock', 'paper', 'scissors'];[m
+[31m-        let randomAnswer = Math.floor(Math.random()*possibleOutcomes.length);[m
+[31m-            return possibleOutcomes[randomAnswer].toUpperCase();[m
+[31m-    }[m
+[31m-    //Jugar la Ronda[m
+[31m-    function playRound(playerSelection, computerSelection) {[m
+[31m-        const computerSelection = computerPlay();[m
+[31m-        let playerSelection = prompt('rock', 'paper', 'scissors');[m
+[31m-        if (computerSelection === playerSelection) {[m
+[31m-    return 'You draw m8';[m
+[31m-[m
+[31m-  } else if (computerSelection === 'rock' && playerSelection === 'paper') {[m
+[31m-    return 'Winna winna.';[m
+[31m-[m
+[31m-  } else if (computerSelection === 'paper' && playerSelection === 'scissors') {[m
+[31m-    return 'Winna winna.';[m
+[31m-[m
+[31m-  } else if (computerSelection === 'scissors' && playerSelection === 'rock') {[m
+[31m-    return 'Winna winna.';[m
+[31m-[m
+[31m-  } else if (computerSelection === 'scissors' && playerSelection === 'paper') {[m
+[31m-    return 'Loser. Sad.';[m
+[31m-[m
+[31m-  } else if (computerSelection === 'paper' && playerSelection === 'rock') {[m
+[31m-    return 'Loser. Sad.';[m
+[32m+[m[41m    [m
+[32m+[m[32m    <button class="rock">Rock</button>[m
+[32m+[m[32m    <button class="paper">Paper</button>[m
+[32m+[m[32m    <button class="scissors">Scissors</button>[m
+ [m
+[31m-  } else if (computerSelection === 'rock' && playerSelection === 'scissors') {[m
+[31m-    return 'Loser. Sad.';[m
+[32m+[m[32m    <div id="textContainer"></div>[m
+ [m
+[31m-  } else {[m
+[31m-    return 'You did something wrong.';[m
+[31m-  }[m
+[31m-}[m
+[31m-//Function that allows us to play a 5 round game[m
+[31m-function game(){[m
+[31m-    for (var i = 0; i < 5; i++) {[m
+[31m-    let playerSelection = prompt('Rock, paper, scissors?').toUpperCase();[m
+[31m-    let computerSelection = computerPlay();[m
+[31m-    console.log(playRound(playerSelection, computerSelection));[m
+[31m-  }[m
+[31m-}[m
+[31m-            [m
+[32m+[m[32m    <script>[m
+[32m+[m[32m          let userWins = 0,[m
+[32m+[m[32m        computerWins = 0;[m
+[32m+[m[41m    [m
+[32m+[m[32m    let playerSelection,[m
+[32m+[m[32m        computerSelection;[m
+[32m+[m[32m    let buttonRock = document.querySelector('.rock');[m
+[32m+[m[32m    let buttonPaper = document.querySelector('.paper');[m
+[32m+[m[32m    let buttonScissors = document.querySelector('.scissors');[m
+[32m+[m[41m    [m
+[32m+[m[32m    buttonRock.addEventListener('click', () => playRound('rock'));[m
+[32m+[m[32m    buttonPaper.addEventListener('click', () => playRound('paper'));[m
+[32m+[m[32m    buttonScissors.addEventListener('click', () => playRound('scissors'));[m
+ [m
+[31m-  // your code here![m
+[32m+[m[32m    function playRound(playerSelection) {[m
+[32m+[m[32m        if (userWins===5 || computerWins===5) return;[m
+[32m+[m[32m        let computerPlay= Math.random()*10;[m
+[32m+[m[32m        if (computerPlay>=0 && computerPlay<(10/3)) {[m
+[32m+[m[32m            computerSelection= 'rock';[m
+[32m+[m[32m            if (playerSelection==='scissors') {[m
+[32m+[m[32m                computerWins++;[m
+[32m+[m[32m                roundResult = `You lost this round. Rock beats scissors.`;[m
+[32m+[m[32m            } else if (playerSelection==='paper') {[m
+[32m+[m[32m                userWins++;[m
+[32m+[m[32m                roundResult = `You won this round. Paper beats rock.`;[m
+[32m+[m[32m            } else{[m
+[32m+[m[32m                roundResult = `Neither won this round. Rock can\'t beat rock.`;[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m        else if (computerPlay>=(10/3) && computerPlay<(10/3*2)) {[m
+[32m+[m[32m            computerSelection= 'paper';[m
+[32m+[m[32m            if (playerSelection==='scissors') {[m
+[32m+[m[32m                userWins++;[m
+[32m+[m[32m                roundResult = `You won this round. Scissors beat paper.`;[m
+[32m+[m[32m            } else if (playerSelection==='rock') {[m
+[32m+[m[32m                computerWins++;[m
+[32m+[m[32m                roundResult = `You lost this round. Paper beats rock.`;[m
+[32m+[m[32m            } else{[m
+[32m+[m[32m                roundResult = `Neither won this round. Paper can\'t beat paper.`[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m[41m [m
+[32m+[m[32m        else {[m
+[32m+[m[32m            computerSelection= 'scissors';[m
+[32m+[m[32m            if (playerSelection==='rock') {[m
+[32m+[m[32m                userWins++;[m
+[32m+[m[32m                roundResult = `You won this round. Rock beats scissors.`;[m
+[32m+[m[32m            } else if (playerSelection==='paper') {[m
+[32m+[m[32m                computerWins++;[m
+[32m+[m[32m                roundResult = `You lost this round. Scissors beat paper.`;[m
+[32m+[m[32m            } else{[m
+[32m+[m[32m                roundResult = `Neither win. Scissors can\'t beat scissors.`;[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[41m        [m
+[32m+[m[32m        let textContainer = document.querySelector("#textContainer");[m[41m        [m
+[32m+[m[41m        [m
+[32m+[m[32m        if (userWins<5 && computerWins<5) {[m
+[32m+[m[32m            roundText = document.createElement('p');[m
+[32m+[m[32m            roundText.textContent = `${roundResult} Current Score is: ${userWins}:${computerWins}`;[m
+[32m+[m[32m            textContainer.appendChild(roundText);[m
+[32m+[m[32m        } else {[m
+[32m+[m[32m            if (userWins===5) {[m
+[32m+[m[32m                roundText = document.createElement('p');[m
+[32m+[m[32m                roundText.textContent = `You have won. Final score is: ${userWins}:${computerWins}`;[m
+[32m+[m[32m                textContainer.appendChild(roundText);[m
+[32m+[m[32m            } else {[m
+[32m+[m[32m                roundText = document.createElement('p');[m
+[32m+[m[32m                roundText.textContent = `You have lost. Final score is: ${userWins}:${computerWins}`;[m
+[32m+[m[32m                textContainer.appendChild(roundText);[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+[32m+[m[32m    }[m[41m    [m
+[32m+[m[32m    </script>[m
+ [m
+[31m-}[m
+[31m-</script>[m
+ </body>[m
+[31m-</html>[m
+\ No newline at end of file[m
+[32m+[m[32m</html>[m
