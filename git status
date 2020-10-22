@@ -1,0 +1,59 @@
+[1mdiff --git a/ppt.html b/ppt.html[m
+[1mindex 4f52bd2..c0a7fcd 100644[m
+[1m--- a/ppt.html[m
+[1m+++ b/ppt.html[m
+[36m@@ -6,8 +6,52 @@[m
+ <script>[m
+     //haremos la funcion computerPlay[m
+     function computerPlay(){[m
+[31m-        [m
+[32m+[m[32m        let possibleOutcomes = ['rock', 'paper', 'scissors'];[m
+[32m+[m[32m        let randomAnswer = Math.floor(Math.random()*possibleOutcomes.length);[m
+[32m+[m[32m            return possibleOutcomes[randomAnswer].toUpperCase();[m
+     }[m
+[32m+[m[32m    //Jugar la Ronda[m
+[32m+[m[32m    function playRound(playerSelection, computerSelection) {[m
+[32m+[m[32m        const computerSelection = computerPlay();[m
+[32m+[m[32m        let playerSelection = prompt('rock', 'paper', 'scissors');[m
+[32m+[m[32m        if (computerSelection === playerSelection) {[m
+[32m+[m[32m    return 'You draw m8';[m
+[32m+[m
+[32m+[m[32m  } else if (computerSelection === 'rock' && playerSelection === 'paper') {[m
+[32m+[m[32m    return 'Winna winna.';[m
+[32m+[m
+[32m+[m[32m  } else if (computerSelection === 'paper' && playerSelection === 'scissors') {[m
+[32m+[m[32m    return 'Winna winna.';[m
+[32m+[m
+[32m+[m[32m  } else if (computerSelection === 'scissors' && playerSelection === 'rock') {[m
+[32m+[m[32m    return 'Winna winna.';[m
+[32m+[m
+[32m+[m[32m  } else if (computerSelection === 'scissors' && playerSelection === 'paper') {[m
+[32m+[m[32m    return 'Loser. Sad.';[m
+[32m+[m
+[32m+[m[32m  } else if (computerSelection === 'paper' && playerSelection === 'rock') {[m
+[32m+[m[32m    return 'Loser. Sad.';[m
+[32m+[m
+[32m+[m[32m  } else if (computerSelection === 'rock' && playerSelection === 'scissors') {[m
+[32m+[m[32m    return 'Loser. Sad.';[m
+[32m+[m
+[32m+[m[32m  } else {[m
+[32m+[m[32m    return 'You did something wrong.';[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m[32m//Function that allows us to play a 5 round game[m
+[32m+[m[32mfunction game(){[m
+[32m+[m[32m    for (var i = 0; i < 5; i++) {[m
+[32m+[m[32m    let playerSelection = prompt('Rock, paper, scissors?').toUpperCase();[m
+[32m+[m[32m    let computerSelection = computerPlay();[m
+[32m+[m[32m    console.log(playRound(playerSelection, computerSelection));[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m[41m            [m
+[32m+[m
+[32m+[m[32m  // your code here![m
+[32m+[m
+[32m+[m[32m}[m
+ </script>[m
+ </body>[m
+ </html>[m
+\ No newline at end of file[m
